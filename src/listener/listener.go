@@ -1,4 +1,4 @@
-package main
+package listener
 
 import (
 	"context"
@@ -11,7 +11,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
-func main() {
+func SubscribeERC20(endpoint string, address string) {
 
 	fmt.Println("Starting")
 

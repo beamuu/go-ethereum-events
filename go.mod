@@ -1,4 +1,4 @@
-module main
+module github.com/nutchanonc/go-ethereum-event
 
 go 1.13
 

@@ -1,0 +1,17 @@
+{
+  "name": "go-ethereum-events",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nutchanonc/go-ethereum-events.git",
+  "author": "nutchanonc <nutchanonc@github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.1",
+    "npx": "^10.2.2"
+  },
+  "scripts": {
+    "start": "go run src/main.go",
+    "compile": "truffle compile",
+    "build": "go build"
+  }
+}

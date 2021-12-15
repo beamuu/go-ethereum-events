@@ -11,7 +11,9 @@
   },
   "scripts": {
     "start": "go run src/main.go",
-    "compile": "truffle compile",
+    "compile-sol": "solc --abi contracts/ERC20.sol -o build --overwrite",
+    "gen-abi": "abigen --abi=build/ERC20.abi --pkg=token --out=src/erc20/ERC20.go",
+    "create-abi-package": "yarn compile-sol && yarn gen-abi",
     "build": "go build"
   }
 }

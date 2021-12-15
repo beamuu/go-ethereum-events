@@ -7,7 +7,7 @@ import (
 	"math/big"
 	"strings"
 
-	"main/src/erc20"
+	"go-ethereum-events/src/erc20"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
@@ -66,19 +66,28 @@ func SubscribeERC20(endpoint string, address string) {
 	for {
 		select {
 		case err := <-sub.Err():
+
 			log.Fatal(err)
+
 		case vLog := <-logs:
+			
+			fmt.Println(vLog.TxHash.Hex())
+			// fmt.Println(vLog.Data)
+			// fmt.Println(vLog.Topics)
+
 			switch vLog.Topics[0].Hex() {
+
 			case logTransferSigHash.Hex():
 				fmt.Printf("Log Name: Transfer\n")
 	
 				var transferEvent LogTransfer
 	
-				err := contractAbi.Unpack(&transferEvent, "Transfer", vLog.Data)
+				unpacked, err := contractAbi.Unpack("Transfer", vLog.Data)
 				if err != nil {
 					log.Fatal(err)
 				}
-	
+				fmt.Println(unpacked)
+
 				transferEvent.From = common.HexToAddress(vLog.Topics[1].Hex())
 				transferEvent.To = common.HexToAddress(vLog.Topics[2].Hex())
 	
@@ -87,14 +96,16 @@ func SubscribeERC20(endpoint string, address string) {
 				fmt.Printf("Tokens: %s\n", transferEvent.Tokens.String())
 	
 			case logApprovalSigHash.Hex():
+
 				fmt.Printf("Log Name: Approval\n")
 	
 				var approvalEvent LogApproval
 	
-				err := contractAbi.Unpack(&approvalEvent, "Approval", vLog.Data)
+				unpacked, err := contractAbi.Unpack("Approval", vLog.Data)
 				if err != nil {
 					log.Fatal(err)
 				}
+				fmt.Println(unpacked)
 	
 				approvalEvent.TokenOwner = common.HexToAddress(vLog.Topics[1].Hex())
 				approvalEvent.Spender = common.HexToAddress(vLog.Topics[2].Hex())

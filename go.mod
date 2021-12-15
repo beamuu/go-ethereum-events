@@ -1,4 +1,4 @@
-module main
+module go-ethereum-events
 
 go 1.13
 

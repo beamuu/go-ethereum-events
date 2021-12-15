@@ -1,7 +1,7 @@
 package main
 
 import (
-	"main/src/listener"
+	"go-ethereum-events/src/listener"
 )
 
 func main() {
